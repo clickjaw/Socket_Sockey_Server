@@ -4,6 +4,8 @@ const cors = require("cors");
 const { emit } = require("process");
 require("dotenv").config();
 
+
+
 const http = require("http").createServer(app);
 
 const io = require("socket.io")(http, {
@@ -27,7 +29,7 @@ io.on("connection", (socket) => {
     io.to(userToCall).emit("callUser", { signal: signalData, from, name });
   });
   socket.on('answerCall', (data)=>{
-    io.to(data.to)emit('callAccepted', data.signal)
+    io.to(data.to).emit('callAccepted', data.signal)
   })
 });
 
